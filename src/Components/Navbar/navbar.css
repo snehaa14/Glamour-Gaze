@@ -20,7 +20,7 @@
   align-items: center;
   list-style: none;
   gap: 50px;
-  color:#626262;
+  color:white;
   font-size: 15px;
   font-weight: 500;
   z-index: 100;
@@ -47,18 +47,19 @@
   display: flex;
   align-items: center;
   gap: 45px;
+  margin-left: 20%;
 }
 
 .nav-login-cart button{
   width: 157px;
   height: 58px;
   outline: none;
-  border: 1px solid #7a7a7a;
-  border-radius: 75px;
-  color: #515151;
+  border: none;
+  color: white;
   font-size: 20px;
-  font-weight: 500;
-  background: white;
+  font-weight: 600;
+  background: transparent;
+  margin-left: 45%;
   cursor: pointer;
 }
 

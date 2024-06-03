@@ -1,6 +1,6 @@
 .main-container{
   height: 100vh;
-  background: url('../Components/assets/img/hero-m1.webp');
+  background: url('../Components/assets/img/hero-main-image.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
