@@ -1,0 +1,61 @@
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.overlay1 {
+  background: url('../assets/img/backgroung-image1.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 110vh; 
+  width: 100%;
+  position: relative;
+  margin-top: 5%;
+}
+
+.overlay-inside-wrapper {
+  height: 110vh; 
+  width: 100%;
+  overflow: -moz-hidden-unscrollable;
+
+}
+
+.overlay-inside {
+  background: rgba(23, 23, 23, 0.577);
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+
+.overlay-inside img {
+  max-width: 100%;
+  height: 500px;
+  margin-left: 100px;
+  margin-bottom: 20px;
+}
+
+.overlay-inside h1 {
+  margin-bottom: 20px;
+}
+
+.overlay-inside button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background: transparent;
+  color: white;
+  border: 1px solid white; 
+  transition:  0.3s ease-in;
+}
+
+.overlay-inside button:hover {
+  background: white;
+  color: black;
+}
+
+
