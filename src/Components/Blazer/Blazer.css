@@ -1,12 +1,13 @@
 .blazer {
   display: flex;
-  height: 100vh;
+  height: 150vh;
   width: 100%;
 }
 
 .blazer-left-part,
 .blazer-right-part {
   width: 50%;
+  height: 100vh;
 }
 
 .blazer-left-part{
@@ -55,7 +56,7 @@
 }
 
 .blazer-right-part img {
-  height: 100%;
+
   width: 100%;
   object-fit: cover;
 }
