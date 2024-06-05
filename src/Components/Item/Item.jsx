@@ -3,6 +3,7 @@ import './Item.css'
 const Item = (props) => {
   return (
     <div className='item'>
+      {/* <Link to={`/product/${props.id}`}><img src={props.image} alt="" /></Link> */}
       <img src={props.image} alt="" />
       <p>{props.name}</p>
       <div className="item-prices">
