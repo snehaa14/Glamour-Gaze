@@ -1,17 +1,24 @@
-.item{
-  width: 350px;
 
+*{
+  margin: 0;
+  padding: 0;
+}
+.item {
+  margin: 10px; 
+  display: inline-block;
+  text-align: center; 
 }
 
 .item p{
-  margin: 6px 0px;
+  margin: 2px 0px;
 }
 
-.item-prices{
+.item-prices {
   display: flex;
-  gap: 20px;
-
+  justify-content: center;
+  gap: 5px; 
 }
+
 
 .item-price-new{
   color: #374151;
