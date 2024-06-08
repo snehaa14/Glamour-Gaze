@@ -9,33 +9,33 @@ import image6 from '../assets/img/f6.png'
 const Features = () => {
   return (
     <div>
-      <div class="feature section-p1">
-      <div class="features-box">
+      <div className="feature section-p1">
+      <div className="features-box">
         <img src={image1} alt="" />
         <h5>Free Shipping</h5>
       </div>
 
-      <div class="features-box">
+      <div className="features-box">
         <img src={image2} alt="" />
         <h5>Online Order</h5>
       </div>
 
-      <div class="features-box">
+      <div className="features-box">
         <img src={image3} alt="" />
         <h5>Save Money</h5>
       </div>
 
-      <div class="features-box">
+      <div className="features-box">
         <img src={image4} alt="" />
         <h5>Promotions</h5>
       </div>
 
-      <div class="features-box">
+      <div className="features-box">
         <img src={image5} alt="" />
         <h5>Happy Sell</h5>
       </div>
 
-      <div class="features-box">
+      <div className="features-box">
         <img src={image6} alt="" />
         <h5>24/7 Support</h5>
       </div>
