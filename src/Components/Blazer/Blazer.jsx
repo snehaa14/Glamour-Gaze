@@ -1,6 +1,8 @@
 import React from 'react'
 import './Blazer.css'
 import blazer from '../assets/img/blazer-image1.webp'
+import women from '../assets/img/womenInBlazer.jpeg'
+import women2 from '../assets/img/lavender.jpeg'
 const Blazer = () => {
   return (
     <div className='blazer'>
@@ -13,7 +15,7 @@ Professional Pinstripe Blazers Collection</h1>
      </div>
 
      <div className="blazer-right-part">
-         <img src={blazer} alt="" />
+         <img src={women2} alt="" />
      </div>
     </div>
   )
