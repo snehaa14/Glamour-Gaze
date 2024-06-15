@@ -3,10 +3,13 @@ import './ProductDisplay.css'
 import star_icon from "../assets/img/star_icon.png";
 import start_dull_icon from "../assets/img/star_dull_icon.png";
 import { ShopContext } from '../../Context/ShopContext';
+
 const ProductDisplay = (props) => {
   const { product } = props;
   const {addToCart} = useContext(ShopContext);
   return (
+    <>
+   
     <div className='productdisplay'>
       <div className="productdisplay-left">
         <div className="productdisplay-img-list">
@@ -52,6 +55,7 @@ const ProductDisplay = (props) => {
         <p className="productdisplay-right-category"><span>Tags:</span>Modern,Latest</p>
       </div>
     </div>
+    </>
   )
 }
 

@@ -5,6 +5,8 @@ import Breadcrum from '../Components/Breadcrums/Breadcrum';
 import ProductDisplay from '../Components/ProductDisplay/ProductDisplay';
 import Description from '../Components/Description/Description';
 import RelatedProducts from '../Components/RelatedProducts/RelatedProducts';
+import Navbar from '../Components/Navbar/Navbar';
+import shopCategoryLogo from '../Components/assets/img/gg.png';
 
 const Product = () => {
     const { all_product } = useContext(ShopContext);
@@ -17,6 +19,9 @@ const Product = () => {
 
     return (
         <div>
+              <div className="nav-container">
+        <Navbar className="cart-navbar" logo={shopCategoryLogo} />
+      </div>
             <Breadcrum product={product} />
             <ProductDisplay product={product} />
             <Description/>
