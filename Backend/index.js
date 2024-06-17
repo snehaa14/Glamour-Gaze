@@ -81,41 +81,53 @@ const Product = mongoose.model("Product",{
         },    
 })
 
-app.post('/addproduct',async(req,res)=>{
-
-    let products = await Product.find({});
+app.post('/addproduct', async (req, res) => {
     let id;
-    if(products.length > 0)
-    {
-        let last_product_array=products.slice(-1);
-        let last_product = last_product_array[0];
-        id = last_product.id + 1;
-    }
-    else{
-        id = 1;
+
+    if (!req.body.id) {
+        // Fetch all products
+        let products = await Product.find({});
+        
+        if (products.length > 0) {
+            let last_product_array = products.slice(-1);
+            let last_product = last_product_array[0];
+            id = last_product.id + 1; // Increment the last product ID by 1
+        } else {
+            id = 1; // Start with 1 if no products exist
+        }
+    } else {
+        id = req.body.id; // Use the provided ID
     }
 
     const product = new Product({
-        id:req.body.id,
-        name:req.body.name,
-        image:req.body.image,
-        category:req.body.category,
-        new_price:req.body.new_price,
-        old_price:req.body.old_price,
-
+        id: id,
+        name: req.body.name,
+        image: req.body.image,
+        category: req.body.category,
+        new_price: req.body.new_price,
+        old_price: req.body.old_price,
     });
+
     console.log(product);
-    await product.save(); //automatically saved in db
 
-    console.log("product saved");
+    try {
+        await product.save(); // Automatically save in the database
+        console.log("Product saved");
 
-    res.json({
-        success:true,
-        name:req.body.name,
-        message:"product added successfully"
+        res.json({
+            success: true,
+            name: req.body.name,
+            message: "Product added successfully"
+        });
+    } catch (error) {
+        console.error("Error saving product:", error);
+        res.status(500).json({
+            success: false,
+            message: "Failed to add product"
+        });
+    }
+});
 
-    })
-})
 
 
 //creating API For deleting product
@@ -138,12 +150,120 @@ app.get('/allproducts',async(req,res)=>{
     res.send(products);
 })
 
+//user schema
+const Users = new mongoose.model('Users',{
+    name:{
+        type:String,
+    },
+    email:{
+        type:String,
+        unique:true,
+    },
+    password:{
+        type:String,
+    },
+    cartData:{
+        type:Object,
+    },
+    date:{
+        type:Date,
+        default:Date.now,
+    }
+})
+
+
+
+//creating endpoint for resgistering the user
+
+app.post('/signup',async (req,res)=>{
+//existing user
+    let check = await Users.findOne({email:req.body.email});
+    if(check){
+        return res.status(400)
+        .json({
+            success:false,
+            errors:"existing user found with same email address"
+        })
+    }
+    //empty cart
+    let cart={};
+    for(let i=0;i<300;i++)
+    {
+            cart[i]=0;
+    }
+    //creating user
+    const user = new Users({
+        name:req.body.username,
+        email:req.body.email,
+        password:req.body.password,
+        cartData:cart,
+        
+    })
+    //saving in database
+    await user.save();
+
+    //jwt authentication
+    const data =  {
+        user:{
+            id:user.id
+        }
+    }
+    //creating token
+    //generating token
+    const token = jwt.sign(data,'secret_ecom');
+    res.json({
+        success:true,
+        token,
+    })
+
+})
+
+//end point for  user login
+app.post('/login',async(req,res)=>{
+    let user= await Users.findOne({email:req.body.email});
+    if(user)
+        {
+            //comparing password
+            const passCompare = req.body.password===user.password;
+            if(passCompare){
+                const data =  {
+                    user:{
+                        id:user.id
+
+                    }
+                }
+                //jwt to create token
+                const token = jwt.sign(data,"secret_ecom");
+                res.json({
+                    success:true,
+                    token
+                });
+            }
+
+            else{
+                res.json({
+                    success:false,
+                    errors:"Wrong Password"
+                })
+            }
+        }
+
+        else{
+            res.json({
+                success:false,
+                errors:"User Not Found,Wrong email id"
+            })
+        }
+})
+
+
+
 app.listen(port,(error)=>{
     if(!error){
-        console.log("Server is running on port "+port);
+        console.log("Server is running on port " +port);
     }
     else{
-        console.log("Error in running server"+error);
+        console.log("Error in running server" + error);
     }
 })
 
