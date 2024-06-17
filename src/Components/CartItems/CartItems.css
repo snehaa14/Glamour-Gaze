@@ -42,7 +42,7 @@
 }
 .cartitems-down{
   display: flex;
-  margin: 100px 0px;
+  margin: 100px 20px;
 }
 .cartitems-total{
   flex:1;

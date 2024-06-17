@@ -1,12 +1,17 @@
-import React from 'react'
-import CartItems from '../Components/CartItems/CartItems'
+import React from 'react';
+import CartItems from '../Components/CartItems/CartItems';
+import Navbar from '../Components/Navbar/Navbar';
+import shopCategoryLogo from '../Components/assets/img/gg.png';
 
 const Cart = () => {
   return (
     <div>
-     <CartItems/>
+       <div className="nav-container">
+        <Navbar className="cart-navbar" logo={shopCategoryLogo} />
+      </div>
+      <CartItems />
     </div>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;
