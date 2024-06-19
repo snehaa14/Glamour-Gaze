@@ -16,9 +16,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Shop />} />
-          <Route path='/mens' element={<ShopCategory banner={men_banner} category="men" />} />
+          <Route path='/mens' element={<ShopCategory banner={men_banner} category="Men" />} />
           <Route path='/womens' element={<ShopCategory banner={bannerWomen} category="women" />} />
-          <Route path='/kids' element={<ShopCategory banner={kids_banner} category="kid" />} />
+          <Route path='/kids' element={<ShopCategory banner={kids_banner} category="Kid" />} />
           <Route path="/product/:productId" element={<Product />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/login' element={<LoginSignup />} />

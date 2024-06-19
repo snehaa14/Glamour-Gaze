@@ -103,8 +103,8 @@ const ShopContextProvider = (props) => {
     
     // Filter products by category
     const womenProducts = all_product.filter(product => product.category === 'women');
-    const menProducts = all_product.filter(product => product.category === 'men');
-    const kidsProducts = all_product.filter(product => product.category === 'kids');
+    const menProducts = all_product.filter(product => product.category === 'Men');
+    const kidsProducts = all_product.filter(product => product.category === 'Kid');
 
     const contextValue = { 
         getTotalCartItems, 
