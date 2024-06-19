@@ -8,6 +8,8 @@ import shopCategoryLogo from '../Components/assets/img/gg.png';
 
 const ShopCategory = (props) => {
   const { all_product } = useContext(ShopContext);
+
+  // Filter products based on category prop
   const filteredProducts = all_product.filter(item => item.category === props.category);
 
   return (
@@ -19,14 +21,14 @@ const ShopCategory = (props) => {
         <img className='shopcategory-banner' src={props.banner} alt={`${props.category} banner`} />
         <div className='shopcategory-indexSort'>
           <p>
-            <span>Showing 1-12</span> out of {filteredProducts.length} products
+            <span>Showing 1-{Math.min(12, filteredProducts.length)}</span> out of {filteredProducts.length} products
           </p>
           <div className='shopcategory-sort'>
             Sort by <img src={dropdown_icon} alt="Sort dropdown icon" />
           </div>
         </div>
         <div className="shopcategory-products">
-          {filteredProducts.map((item, i) => (
+          {filteredProducts.slice(0, 12).map(item => (
             <Item
               key={item.id}
               id={item.id}

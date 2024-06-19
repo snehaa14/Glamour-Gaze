@@ -218,6 +218,89 @@ app.post('/signup',async (req,res)=>{
 
 })
 
+
+//end point for newcollection data
+
+app.get('/newcollections',async(req,res)=>{
+    let products=await Product.find({});
+    let newcollection= products.slice(1).slice(-8);
+    console.log("NEW COLLECTION FETCHED");
+    res.send(newcollection);
+})
+
+
+//endpoint for popular in women section
+app.get('/popularinwomen',async(req,res)=>{
+    let products=await Product.find({category:"women"});
+    let popular_in_women=products.slice(0,4);
+    console.log("POPULAR IN WOMEN FETCHED");
+    res.send(popular_in_women);
+})
+
+//creating middlewear to fetch user
+const fetchUser=async (req,res,next)=>{
+    const token=req.header('auth-token');
+    if(!token)
+        {
+            res.status(401).send({
+                errors:"Please autheticate using valid token"
+            })
+        }
+        else{
+            try{
+                const data= jwt.verify(token,'secret_ecom');
+                req.user=data.user;
+                next();
+            }
+            catch(error)
+            {
+                res.status(401).send({
+                    errors:"Please autheticate using valid token"
+                })
+            }
+        }
+}
+// Endpoint to add item to cart
+app.post('/addtocart', fetchUser, async (req, res) => {
+    console.log("added", req.body.itemId);
+    let userData = await Users.findOne({_id: req.user.id});
+    
+    if (!userData.cartData) {
+        userData.cartData = {};  // Initialize cartData if it doesn't exist
+    }
+    
+    userData.cartData[req.body.itemId] = (userData.cartData[req.body.itemId] || 0) + 1;
+    await Users.findOneAndUpdate({_id: req.user.id}, {cartData: userData.cartData});
+    res.send("ADDED");
+});
+
+// Endpoint to remove item from cart
+app.post('/removefromcart', fetchUser, async (req, res) => {
+    console.log("removed", req.body.itemId);
+    let userData = await Users.findOne({_id: req.user.id});
+    
+    if (userData.cartData && userData.cartData[req.body.itemId] > 0) {
+        userData.cartData[req.body.itemId] -= 1;
+        await Users.findOneAndUpdate({_id: req.user.id}, {cartData: userData.cartData});
+    }
+    
+    res.send("Removed");
+});
+
+// Endpoint to get cart data
+app.post('/getcart', fetchUser, async (req, res) => {
+    console.log("GetCart");
+    let userData = await Users.findOne({_id: req.user.id});
+    
+    if (!userData) {
+        return res.status(404).send("User not found");
+    }
+
+    res.json(userData.cartData);
+});
+
+
+
 //end point for  user login
 app.post('/login',async(req,res)=>{
     let user= await Users.findOne({email:req.body.email});
